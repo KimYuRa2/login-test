@@ -7,7 +7,7 @@ const router = express.Router();
 // 컨트롤러 선언
 const ctrl = require('./home.ctrl');
 
-router.get("/", ctrl.home);
+router.get("/", ctrl.hello);
 router.get("/login", ctrl.login)
 
 module.exports = router;
