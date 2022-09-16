@@ -6,10 +6,10 @@ const express = require('express');
 const app = express();
 
 //라우팅(라우팅을 위한 파일 연결)
-const home = require("./routes/home");
+const home = require("./src/routes/home");
 
 //앱 세팅
-app.set("views", "./views");
+app.set("views", "./src/views");
 app.set("view engine", "ejs");
 
 //미들웨어 등록
