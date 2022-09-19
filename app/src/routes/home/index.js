@@ -7,7 +7,10 @@ const router = express.Router();
 // 컨트롤러 선언
 const ctrl = require('./home.ctrl');
 
-router.get("/", ctrl.hello);
-router.get("/login", ctrl.login)
+router.get("/", ctrl.output.hello);
+router.get("/login", ctrl.output.login);
+
+//#12. 로그인 프로세스 처리
+router.post("/login", ctrl.process.login);
 
 module.exports = router;

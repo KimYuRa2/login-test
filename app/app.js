@@ -3,6 +3,7 @@
 
 //모듈
 const express = require('express');
+const bodyParser= require('body-parser');
 const app = express();
 
 //라우팅(라우팅을 위한 파일 연결)
@@ -14,6 +15,8 @@ app.set("view engine", "ejs");
 app.use(express.static(`${__dirname}/src/public`)); //${__dirname} : 현재 app.js가 있는 위치를 반환(app폴더 안에 있음). app안의 src안의 public 폴더를 정적(static)경로로 추가하겠다.
 // 위 설정으로 인해 => views>home>login.ejs에서( <script src="/js/home/login.js"></script>) /js폴더로 접근하게되면, public 안에 있는 js폴더로 접근하게 됨!!
 
+app.use(bodyParser.json()); //bodyparser 미들웨어 등록 (bodyparser가 json데이터를 parsing해올 수 있도록 명시 )
+app.use(bodyParser.urlencoded({ extended : true })); // url을 통해 전달되는 데이터에 한글, 공백 등과 같은 문자가 포함될 경우 제대로 인식되지 않는 문제 해결
 
 //미들웨어 등록
 app.use("/", home); // use -> 미들웨어를 등록해주는 메서드. ("/"라는 경로로 들어오면 home으로 보내줘)
