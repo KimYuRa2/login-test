@@ -29,6 +29,16 @@ function login(){
         },
         body: JSON.stringify(req)
     })
+    .then( (res) => res.json() ) // 서버에서 응답을 받아오면 then 실행
+    .then( (res) => console.log(res) ); //promise 타입을 then메소드로 다시 접근
+    //윗줄은 .then (console.log); 로 생략 가능..!!!!! 이렇게 써도 위처럼 res를 받아서 console.log로 res를 찍어줌
+
+    /*
+        .then( (res) => console.log(res.json())) 실행 시 , Promise데이터가 날라옴!
+        - res.json()의 반환값은 Response 스트림인데, ".json()" 메서드를 통해 Response(응답) 스트림을 읽을 수 있다.
+        - Response는 데이터가 모두 받아진 상태가 아님!!
+        - ".json()"으로 Response 스트림을 가져와 완료될 때까지 읽는다. 다 읽은 body의 텍스트를 Promise 형태로 반환한다.
+    */
 
     console.log(req);
     console.log(JSON.stringify(req)); //key값과 value값이 모두 문자열로 감싸짐
