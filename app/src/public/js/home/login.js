@@ -15,6 +15,23 @@ function login(){
         id : id.value,
         psword : psword.value,
     };
+    
+    // #11. fetch로 프론트에서 데이터 전달하기
+    fetch('/login', {
+        //json이라는 데이터타입을 이용해서 데이터를 전달하기
+        /*
+            req를 json형태로 감싸주어야 함 (json.stringify(req) 라는 메서드를 이용)
+             => stringify : req(object)를 문자열로 바꿔주는 메서드
+        */
+        method : "POST", //restAPI 강의 참고
+        headers : { //내가 전달하는 데이터가 json형태임을 알려주기
+            "Content-Type" : "application/json", // application/json의 형태로 json데이터를 전달한다
+        },
+        body: JSON.stringify(req)
+    })
+
     console.log(req);
+    console.log(JSON.stringify(req)); //key값과 value값이 모두 문자열로 감싸짐
+
 }
 
