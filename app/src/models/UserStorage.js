@@ -21,6 +21,17 @@ class UserStorage {
         return newUsers;
     }
 
+    static getUserInfo(id) { // 내가 요청한 id에 해당하는 데이터들만 가져오는 메서드
+        const users = this.#users;
+        const idx = users.id.indexOf(id);// Users.js > const { id, psword } = UserStorage.getUserInfo("test1"); 에서, "test1"라는 id의 index를 구해서 idx에 넣음
+        const userKeys = Object.keys(users); // users의 키값들만 리스트로 만듦 => [id, psword, name]
+        const userInfo = userKeys.reduce( (newUser, info) => {
+            newUser[info] = users[info][idx];
+            return newUser;
+        }, {});
+        return userInfo;
+    }
+
 }
 
 module.exports = UserStorage;
