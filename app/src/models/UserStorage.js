@@ -32,6 +32,17 @@ class UserStorage {
         return userInfo;
     }
 
+    //#20.
+    static save(userInfo){
+        const users = this.#users;
+        // 클라이언트에서 데이터를 전달하면, users 오브젝트 안에 해당 데이터들을 저장해야함
+        users.id.push(userInfo.id);
+        users.name.push(userInfo.name);
+        users.psword.push(userInfo.psword);
+        // console.log(users);
+        return {success : true};
+    }
+
 }
 
 module.exports = UserStorage;

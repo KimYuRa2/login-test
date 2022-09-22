@@ -12,12 +12,18 @@ const registerBtn = document.querySelector('#button'); //== button
 registerBtn.addEventListener("click", register ); // registerBtn에 click이벤트 발생 시 register 함수 실행시킴
 
 function register(){
+    if( !id.value ){ // 오류 : 아이디 입력창이 비었음
+        alert("아이디를 입력해 주십시오.");
+    } 
+    //#20. 입력한 비밀번호(psword)와 입력한 비밀번호 확인(confirnPsword)이 일치하는지 확인하기
+    if( psword !== confirmPsword ){
+        return alert("비밀번호가 일치하지 않습니다");
+    }
     console.log(id.value); //id에 들어있는 값을 가져오는 방법: tag의 value에 접근하기!
     const req = {
         id : id.value,
         name : name.value,
         psword : psword.value,
-        confirmPsword : confirmPsword.value,
     };
     
     // #11. fetch로 프론트에서 데이터 전달하기
