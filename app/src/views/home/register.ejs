@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+    <html lang="ko">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+
+            <!-- script속성 : defer / async 더 알아보기! (#10. DOM으로 HTML 객체 제어하기 | 프런트 기능 구현) -->
+            <!--
+                1) defer : defer 속성이 있는 스크립트(이하 defer 스크립트 또는 지연 스크립트)를 '백그라운드’에서 다운로드 합니다. 따라서 지연 스크립트를 다운로드 하는 도중에도 HTML 파싱이 멈추지 않습니다. 그리고 defer 스크립트 실행은 페이지 구성이 끝날 때까지 지연 됩니다.
+                => https://ko.javascript.info/script-async-defer 참고
+            --> 
+            <script src="/js/home/login.js" defer></script>
+            <link rel="stylesheet" href="/css/home/login.css">
+        </head>
+
+        <body>
+            <!-- <input id="id" type="text" placeholder="아이디"><br>
+            <input id="psword" type="password" placeholder="비밀번호"><br>
+            <button id="loginBtn">로그인</button> -->
+
+            <div class="login-page">
+                <div class="form">
+                  <form class="register-form">
+                    <input id="id" type="text" placeholder="아이디"/>
+                    <input id="name" type="text" placeholder="이름"/>
+                    <input id="psword" type="password" placeholder="비밀번호"/>
+                    <input id="confirm-psword" type="password" placeholder="비밀번호 확인"/>
+                    <button id="loginBtn">create</button>
+                    <p class="message">Already registered? <a href="/login">Login</a></p>
+                  </form>
+                  <!-- <form class="login-form">
+                    <input id="id" type="text" placeholder="username"/>
+                    <input id="psword" type="password" placeholder="password"/>
+                    <button id="loginBtn">login</button>
+                    <p class="message">Not registered? <a href="/register">Create an account</a></p>
+                  </form> -->
+                </div>
+              </div>
+        </body>
+</html>
+
+<!-- codepen : login 오픈소스 사용함 -->
+<!-- Copyright (c) 2022 by Aigars Silkalns (https://codepen.io/colorlib/pen/rxddKy) -->
