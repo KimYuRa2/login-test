@@ -1,12 +1,14 @@
 // #3. 컨트롤러 분리
 "use strict";
 
+//#15. 
+const UserStorage = require("../../models/UserStorage");
 
 //#13. 일단 컨트롤러 자체에서 해당 데이터 만들어놓기
-const users = {
-    id : ["test1", "test2", "test3"],
-    psword : ["1234", "12345", "123456"],
-}
+// const users = {
+//     id : ["test1", "test2", "test3"],
+//     psword : ["1234", "12345", "123456"],
+// }
 
 // const hello = (req, res) => {
 //     res.render("home/index");
@@ -21,6 +23,9 @@ const users = {
 //     res.render("home/login");
 // }
 
+
+
+
 //#12. 렌더링하는 역할의 hello, login 함수를 output객체로 빼줌
 const output = {
     hello : (req, res) => {
@@ -30,7 +35,7 @@ const output = {
     login : (req,res) => {
         res.render("home/login");
     }
-}
+};
 
 //#12. #13. 
 const process = {
@@ -44,23 +49,35 @@ const process = {
         const id = req.body.id;
         const psword = req.body.psword;
 
-        console.log(id, psword);
+        // console.log(id, psword);
+        
+        //#15. 
+        // const userStorage = new UserStorage();
+        const users = UserStorage.getUsers("id", "psword"); // 원래,users가 있는 UserStorage.js 파일 외에 다른 외부 파일에서 UserStorage.users같은 내부 데이터에 접근하지 못하도록 하는게 맞음..!!
 
+        const response = {};
         if(users.id.includes(id)){ // 요청한 id가 있으면
             const idx = users.id.indexOf(id); // 요청한 id의 index를 idx라는 변수에 저장함
             if( users.psword[idx] === psword ){ // 요청한 id가 있음 => 요청한 psword 확인 성공 => 로그인 성공
-                return res.json({ // 로그인이 성공했다는 object를 json으로 만들어서, 프론트로 res(응답)를 보내줌
-                    success : true,
-                });
+                response.success = true;
+                // return res.json({ // 로그인이 성공했다는 object를 json으로 만들어서, 프론트로 res(응답)를 보내줌
+                //     success : true,
+                // });
+                return res.json(response);
             }
         }
+        
+        response.success = false;
+        response.msg = "로그인에 실패하셨습니다.";
+        // // return res.json({
+        // //     success : false,
+        // //     msg : "로그인에 실패하셨습니다.",
+        // // });
+        return res.json(response);
 
-        return res.json({
-            success : false,
-            msg : "로그인에 실패하셨습니다.",
-        });
+        
     }
-}
+};
 
 
 
