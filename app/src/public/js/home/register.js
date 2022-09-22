@@ -4,20 +4,24 @@ console.log("ggigiigigi");
 console.log("ssssszzzzzㅋㅋ");
 
 const id = document.querySelector('#id'); //DOM 사용하기
+const name = document.querySelector('#name'); 
 const psword = document.querySelector('#psword');
-const loginBtn = document.querySelector('#button'); //== button
+const confirmPsword = document.querySelector('#confirm-psword');
+const registerBtn = document.querySelector('#button'); //== button
 
-loginBtn.addEventListener("click", login ); // loginBtn에 click이벤트 발생 시 login 함수 실행시킴
+registerBtn.addEventListener("click", register ); // registerBtn에 click이벤트 발생 시 register 함수 실행시킴
 
-function login(){
+function register(){
     console.log(id.value); //id에 들어있는 값을 가져오는 방법: tag의 value에 접근하기!
     const req = {
         id : id.value,
+        name : name.value,
         psword : psword.value,
+        confirmPsword : confirmPsword.value,
     };
     
     // #11. fetch로 프론트에서 데이터 전달하기
-    fetch('/login', {
+    fetch('/register', {
         //json이라는 데이터타입을 이용해서 데이터를 전달하기
         /*
             req를 json형태로 감싸주어야 함 (json.stringify(req) 라는 메서드를 이용)
@@ -32,14 +36,14 @@ function login(){
     .then( (res) => res.json() ) // 서버에서 응답을 받아오면 then 실행
     .then( (res) => {
         if(res.success) {
-            location.href = "/";
+            location.href = "/login";
         }else{
             alert(res.msg);
         }
     } ) //promise 타입을 then메소드로 다시 접근
     //.then( (res) => console.log(res) ); => .then (console.log); 로 생략 가능..!!!!! 이렇게 써도 위처럼 res를 받아서 console.log로 res를 찍어줌
     .catch( (err) => {
-        console.error(new Error("로그인 중 에러 발생"));
+        console.error(new Error("회원가입 중 에러 발생"));
     });
     /*
         .then( (res) => console.log(res.json())) 실행 시 , Promise데이터가 날라옴!

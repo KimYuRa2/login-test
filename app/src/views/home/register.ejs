@@ -11,7 +11,7 @@
                 1) defer : defer 속성이 있는 스크립트(이하 defer 스크립트 또는 지연 스크립트)를 '백그라운드’에서 다운로드 합니다. 따라서 지연 스크립트를 다운로드 하는 도중에도 HTML 파싱이 멈추지 않습니다. 그리고 defer 스크립트 실행은 페이지 구성이 끝날 때까지 지연 됩니다.
                 => https://ko.javascript.info/script-async-defer 참고
             --> 
-            <script src="/js/home/login.js" defer></script>
+            <script src="/js/home/register.js" defer></script>
             <link rel="stylesheet" href="/css/home/login.css">
         </head>
 
@@ -27,7 +27,7 @@
                     <input id="name" type="text" placeholder="이름"/>
                     <input id="psword" type="password" placeholder="비밀번호"/>
                     <input id="confirm-psword" type="password" placeholder="비밀번호 확인"/>
-                    <button id="loginBtn">create</button>
+                    <p id="button">create</p>
                     <p class="message">Already registered? <a href="/login">Login</a></p>
                   </form>
                 </div>
