@@ -59,7 +59,7 @@ const process = {
         const user = new User(req.body);
         const response = user.register();
         console.log(response);
-        return res.json(response);  
+        return res.json(response); // 클라이언트에게 전달하는 곳 
     }
 };
 
