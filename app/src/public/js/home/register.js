@@ -1,7 +1,5 @@
 "use strict";
 //#10. DOM을 사용하여 js에서 html에 존재하는 데이터들을 가져와서 제어할 수 있도록 함!
-console.log("ggigiigigi");
-console.log("ssssszzzzzㅋㅋ");
 
 const id = document.querySelector('#id'); //DOM 사용하기
 const name = document.querySelector('#name'); 
@@ -9,14 +7,15 @@ const psword = document.querySelector('#psword');
 const confirmPsword = document.querySelector('#confirm-psword');
 const registerBtn = document.querySelector('#button'); //== button
 
-registerBtn.addEventListener("click", register ); // registerBtn에 click이벤트 발생 시 register 함수 실행시킴
+registerBtn.addEventListener( "click", register ); // registerBtn에 click이벤트 발생 시 register 함수 실행시킴
 
 function register(){
     if( !id.value ){ // 오류 : 아이디 입력창이 비었음
         alert("아이디를 입력해 주십시오.");
     } 
     //#20. 입력한 비밀번호(psword)와 입력한 비밀번호 확인(confirnPsword)이 일치하는지 확인하기
-    if( psword !== confirmPsword ){
+    //#23. 오류 수정 - psword 태그 자체가 아닌 그 태그 안에 입력된 값을 비교해야해서 psword.value !== confirmPsword.value로 수정
+    if( psword.value !== confirmPsword.value ){
         return alert("비밀번호가 일치하지 않습니다");
     }
     console.log(id.value); //id에 들어있는 값을 가져오는 방법: tag의 value에 접근하기!

@@ -55,9 +55,9 @@ const process = {
     },
 
     //#20. 
-    register : (req, res) => {
+    register : async (req, res) => {
         const user = new User(req.body);
-        const response = user.register();
+        const response = await user.register();
         console.log(response);
         return res.json(response); // 클라이언트에게 전달하는 곳 
     }

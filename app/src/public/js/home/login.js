@@ -1,7 +1,5 @@
 "use strict";
 //#10. DOM을 사용하여 js에서 html에 존재하는 데이터들을 가져와서 제어할 수 있도록 함!
-console.log("ggigiigigi");
-console.log("ssssszzzzzㅋㅋ");
 
 const id = document.querySelector('#id'); //DOM 사용하기
 const psword = document.querySelector('#psword');

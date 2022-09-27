@@ -22,10 +22,12 @@ class UserStorage {
         return userInfo;
     }
 
-    static getUsers(...fields) { //static 필수(클래스 자체에서 메서드에 접근하려면 필수임) 은닉화 된 users 변수를 외부에서 쓸 수 있도록 함수로 내보내기 처리
-        // const users =  this.#users;
+    //#23. 
+    static #getUsers(data, isAll, fields){
+        const users = JSON.parse(data); //buffer형태의 data를 parsing해서 가져옴 
+        if(isAll) return users;
         const newUsers = fields.reduce((newUsers, field) => { // reduce(배열메서드) - 반복문 -- fields에 대한 원소가 하나씩 순회됨.  newUsers에는 fields라는 배열의 초기값이 들어가고, 그 다음 변수들은 field에 들어오게 됨
-            console.log(newUsers, field);
+            // console.log(newUsers, field);
             if(users.hasOwnProperty(field)){ //users에 field(해당하는 키 값)가 존재하는가? : 먼저 id가 있으면 그 id에 해당하는 값을 
                 newUsers[field] =  users[field];
             }
@@ -33,6 +35,16 @@ class UserStorage {
         }, {}); // {}라고 쓰면 console.log(newUsers, field);찍으면 {} id , undefined psword 라고 들어감
         console.log(newUsers);
         return newUsers;
+    }
+
+    static getUsers(isAll, ...fields) { //static 필수(클래스 자체에서 메서드에 접근하려면 필수임) 은닉화 된 users 변수를 외부에서 쓸 수 있도록 함수로 내보내기 처리
+        //#23. 파일시스템으로 접근할 수 있도록 설정해줌
+        return fs
+            .readFile("./src/databases/users.json")
+            .then( (data) => {
+                return this.#getUsers(data, isAll, fields);
+            }) //#22. 성공하면 then 실행 : promise로 반환하게되면 then()이라는 메서드를 접근할 수 있게됨!
+            .catch( console.error ); //#22. 오류나면 catch 실행 : promise에 대한 오류 처리는 catch 사용 ,  {(err) => console.error(err)} === {console.error}           
     }
 
     static getUserInfo(id) { // 내가 요청한 id에 해당하는 데이터들만 가져오는 메서드
@@ -46,14 +58,20 @@ class UserStorage {
     }
 
     //#20.
-    static save(userInfo){
-        // const users = this.#users;
-        // 클라이언트에서 데이터를 전달하면, users 오브젝트 안에 해당 데이터들을 저장해야함
+    static async save(userInfo){
+        const users = await this.getUsers(true); //this.getUsers("id", "psword", "name"); 처럼 field 값 모두를 가져오기위해 "isAll" = true로 가져옴
+        if( users.id.includes(userInfo.id) ){// 클라이언트가 입력한 id가 users의 테이블에 이미 있다면
+            // return new Error("이미 존재하는 아이디입니다.");
+            throw "이미 존재하는 아이디입니다."; // js 공식문서(MDN) 참고!! : alert 창에 "이미 존재하는 아이디입니다." 라고 뜨게 됨
+        } 
+        //#23. 파일에 데이터를 쓰기 위해 writeFile(저장할 파일의 경로, 저장할 데이터) 사용하기
+        //데이터 추가
         users.id.push(userInfo.id);
         users.name.push(userInfo.name);
         users.psword.push(userInfo.psword);
-        // console.log(users);
-        return {success : true};
+        fs.writeFile("./src/databases/users.json", JSON.stringify(users)); //users를 문자열형태로 바꿔줌
+        return { success : true };
+        
     }
 
 }

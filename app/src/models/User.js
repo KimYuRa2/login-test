@@ -28,10 +28,16 @@ class User {
     }
 
     //#20.
-    register(){
+    async register(){
         const client = this.body;
-        const response = UserStorage.save(client);
-        return response;
+        try{
+            const response = await UserStorage.save(client);
+            // console.log(response);
+            return response; //UserStorage.js에서 에러를 throw할 수 있게 됨
+        } catch (err) {
+            return { success : false, msg : err };
+        }
+        
     }
 
 
