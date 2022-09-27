@@ -46,10 +46,10 @@ const output = {
 
 //#12. #13. 
 const process = {
-    login : (req, res) => {
+    login : async (req, res) => {
         // #16. (models > User.js와 같이 보기)
         const user = new User(req.body);
-        const response = user.login();
+        const response = await user.login(); //login을 실행하는 애한테도 async-await을 걸어줘야함! async await 함수는 자체적으로 Promise를 반환하도록 돼있음. 따라서 await을 적용해줄 수 있는 것.
         console.log(response);
         return res.json(response);        
     },
