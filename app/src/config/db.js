@@ -1,9 +1,9 @@
 const mysql = require("mysql"); // npm i mysql --save
-const db = mysql.createConnection ({
-    host : "login-lecture.chsjd3aut6vh.ap-northeast-2.rds.amazonaws.com", // db 엔드포인트
-    user : "admin",
-    password : "12345678",
-    database : "login_lecture",
+const db = mysql.createConnection ({ // #27. 환경변수 등록(.env)
+    host : process.env.DB_HOST, // db 엔드포인트
+    user : process.env.DB_USER,
+    password : process.env.DB_PSWORD,
+    database : process.env.DB_DATABASE,
 });
 
 db.connect();
